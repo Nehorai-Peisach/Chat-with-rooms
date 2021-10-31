@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TalkBack.DAL\TalkBack.DAL.csproj" />
     <ProjectReference Include="..\TalkBack.Models\TalkBack.Models.csproj" />
   </ItemGroup>
 

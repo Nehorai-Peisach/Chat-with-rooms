@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "YfcGi4TT+/6MGEJvuIhD+i9ST4SOXZKiFwmEVMBGZsQJjDBtRzCPtPLJHvUVCbLa3aLmfzCtU0BI5iYbtUX7lw==",
+  "dgSpecHash": "GGxHLcjXh0JP+MsRNB0RdgSn+bgOorENinEmmvfu2WmhKwTL49ihTnMhXYgiAL2wKtoyJM8Wgfks4GhUhqt1LA==",
   "success": true,
   "projectFilePath": "C:\\Users\\ofekm\\OneDrive\\מסמכים\\GitHub\\TalkBackProject\\TalkBack.UI\\TalkBack.UI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ofekm\\.nuget\\packages\\mongodb.bson\\2.13.2\\mongodb.bson.2.13.2.nupkg.sha512",
+    "C:\\Users\\ofekm\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

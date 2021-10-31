@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TalkBack.DAL.Models;
 
 namespace TalkBack.UI.Hubs
 {
@@ -48,6 +49,11 @@ namespace TalkBack.UI.Hubs
             await Clients.Group(userConnection.Room).SendAsync("ReceiveMessage", botUser, $"{userConnection.User} has joined {userConnection.Room}");
 
             await SendConnectedUsers(userConnection.Room);
+        }
+
+        public async Task RegsiterUser(User user)
+        {
+            
         }
 
         public Task SendConnectedUsers(string room)

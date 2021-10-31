@@ -27,6 +27,10 @@ const App = () =>{
         setMessages(messages => [...messages, {user, message}])
       });
 
+      connection.on("ReceiveNewUser", (user) => {
+        setUsers(user);
+      });
+
       connection.onclose(e => {
         setConnection();
         setMessages([]);
@@ -58,11 +62,19 @@ const App = () =>{
     }
   }
 
+  const registerUser = async (users) => {
+    try {
+      await connection.invoke("RegsiterUser", users);
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return <div className='app'>
     <h2>TalkBack</h2>
     <hr className='line'/>
     {!connection
-    ? <SignInUp/>
+    ? <SignInUp registerUser={registerUser}/>
       // ? <Lobby joinRoom={joinRoom}/>
        : <Chat messages={messages} sendMessage={sendMessage}
         closeConnection={closeConnection} users ={users}/>}

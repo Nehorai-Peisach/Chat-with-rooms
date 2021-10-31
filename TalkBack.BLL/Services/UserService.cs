@@ -5,22 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using TalkBack.BLL.Interfaces;
 using TalkBack.DAL.Models;
+using TalkBack.DAL.Repositories;
 
 namespace TalkBack.BLL.Services
 {
     public class UserService : IUserService
     {
-        public bool CheckIfExist(User user)
-        {
-            throw new NotImplementedException();
-        }
-
+        private UserRepository repo = new UserRepository();
         public List<User> GetUsers()
         {
-            throw new NotImplementedException();
+            var collection = repo.GetAll();
+            if (collection != null)
+                return repo.GetAll();
+            return new List<User>();
         }
 
-        public bool Login(string username, string password)
+        public void Register(string username, string password)
+        {
+
+        }
+
+        public void Login(string username, string password)
         {
             throw new NotImplementedException();
         }
@@ -30,9 +35,12 @@ namespace TalkBack.BLL.Services
             throw new NotImplementedException();
         }
 
-        public bool Register(string username, string password)
+        private bool CheckIfExist(User user)
         {
-            throw new NotImplementedException();
+            var userInDb = repo.Get(user.UserId);
+            if (user == userInDb)
+                return true;
+            return false;
         }
     }
 }
