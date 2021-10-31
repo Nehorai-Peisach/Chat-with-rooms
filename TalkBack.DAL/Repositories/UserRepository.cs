@@ -1,33 +1,48 @@
-﻿using Microsoft.Extensions.Options;
+﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TalkBack.DAL.DataBases;
 using TalkBack.DAL.Interfaces;
 using TalkBack.DAL.Models;
-using TalkBack.Models.DbContext;
 
 namespace TalkBack.DAL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<User>
     {
-        private readonly IMongoCollection<User> users;
+        static string table = "AllUsers";
+        MyMongoDb db = new MyMongoDb("Users");
 
-        public UserRepository(IOptions<UserDbConfig> options)
+        public void Add(User input)
         {
-            var client = new MongoClient(options.Value.ConnectionString);
-            var database = client.GetDatabase(options.Value.DatabaseName);
-            users = database.GetCollection<User>(options.Value.UserCollection);
+            var collection = db.Client.GetCollection<User>(table);
+            collection.InsertOne(input);
         }
 
-        public IMongoCollection<User> GetUsers() => users;
-
-
-        public void AddUser(User user)
+        public User Get(Guid id)
         {
-            throw new NotImplementedException();
+            var collection = db.Client.GetCollection<User>(table);
+            var filter = Builders<User>.Filter.Eq("UserId", id);
+
+            return collection.Find(filter).First();
+        }
+
+        public List<User> GetAll() => db.Client.GetCollection<User>(table).Find(new BsonDocument()).ToList();
+
+        public void Remove(Guid id)
+        {
+            var collection = db.Client.GetCollection<User>(table);
+            var filter = Builders<User>.Filter.Eq("Id", id);
+            collection.DeleteOne(filter);
+        }
+
+        public void Update(User input, Guid id)
+        {
+            var collection = db.Client.GetCollection<User>(table);
+            var filter = Builders<User>.Filter.Eq("Id", id);
+
+            collection.ReplaceOne(filter, input);
         }
     }
 }
