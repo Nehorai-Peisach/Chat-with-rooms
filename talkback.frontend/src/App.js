@@ -4,6 +4,7 @@ import Lobby from './components/Lobby';
 import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { useState } from 'react';
 import Chat from './components/Chat';
+import SignInUp from './components/SignInUp';
 
 const App = () =>{
 
@@ -61,8 +62,9 @@ const App = () =>{
     <h2>TalkBack</h2>
     <hr className='line'/>
     {!connection
-      ? <Lobby joinRoom={joinRoom}/>
-      : <Chat messages={messages} sendMessage={sendMessage}
+    ? <SignInUp/>
+      // ? <Lobby joinRoom={joinRoom}/>
+       : <Chat messages={messages} sendMessage={sendMessage}
         closeConnection={closeConnection} users ={users}/>}
   </div>
 }
